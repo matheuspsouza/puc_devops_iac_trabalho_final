@@ -1,0 +1,26 @@
+- name: Configurando servidor web com nginx
+  hosts: myhosts
+  become: yes
+  tasks:
+    - name: Atualiza cache
+      apt: update_cache=yes
+
+    - name: Instala Nginx
+      apt: name=nginx state=latest
+      notify:
+        - reinicia nginx
+
+    - name: Inicia Nginx
+      ansible.builtin.service:
+        name: nginx
+        state: started
+
+    - name: Cria arquivo "index.html" com conteudo template
+      template:
+        src: "nginx.html.j2"
+        dest: /var/www/html/index.html
+        mode: 0644
+
+  handlers:
+    - name: reinicia nginx
+      service: name=nginx state=reloaded
