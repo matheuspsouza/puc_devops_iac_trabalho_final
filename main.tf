@@ -132,9 +132,10 @@ resource "azurerm_linux_virtual_machine" "student-vm" {
     version   = "latest"
   }
 
-  computer_name  = "student-vm"
-  admin_username = var.username
-  admin_password = var.vm_admin_password
+  computer_name                   = "student-vm"
+  admin_username                  = var.username
+  admin_password                  = var.vm_admin_password
+  disable_password_authentication = false
 
   # admin_ssh_key {
   #   username   = var.username
