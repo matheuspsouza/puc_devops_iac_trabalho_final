@@ -19,5 +19,4 @@ variable "username" {
 variable "vm_admin_password" {
   type        = string
   description = "Senha do usuário da VM"
-  default     = "temporary"
 }

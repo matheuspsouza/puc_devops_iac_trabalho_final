@@ -17,7 +17,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-      VM_ADMIN_PASSWORD: ${{ secrets.TF_VAR_VM_ADMIN_PASSWORD }}
+      vm_admin_password: ${{ secrets.TF_VAR_VM_ADMIN_PASSWORD }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -47,11 +47,6 @@ jobs:
 
       - name: Inicializar Terraform
         run: terraform init
-        env:
-          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
 
       - name: Criar o Terraform plan
         run: terraform plan
