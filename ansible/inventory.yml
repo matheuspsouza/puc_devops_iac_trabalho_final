@@ -1,6 +1,0 @@
-myhosts:
-  hosts:
-    student-vm:
-      ansible_host: 52.191.15.140
-  vars:
-    ansible_user: azureuser
