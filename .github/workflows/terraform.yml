@@ -54,3 +54,18 @@ jobs:
       - name: Executar o Terraform Apply
         if: github.ref == 'refs/heads/main'
         run: terraform apply -auto-approve
+
+      - name: Instalar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Instalar Ansible
+        run: |
+          python -m pip install --upgrade pip
+          pip install ansible
+
+      - name: Executar Playbook Ansible
+        run: ansible-playbook playbook.yml -i inventory.yml
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: 'false'
