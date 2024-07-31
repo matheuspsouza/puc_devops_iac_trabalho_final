@@ -80,37 +80,6 @@ resource "azurerm_network_interface_security_group_association" "student-nic-nsg
   network_security_group_id = azurerm_network_security_group.student-nsg.id
 }
 
-# # Cria nome generico para a chave ssh
-# resource "random_pet" "ssh_key_name" {
-#   prefix    = "student-ssh"
-#   separator = "-"
-# }
-
-# # gera uma chave publica e uma privada
-# resource "azapi_resource_action" "ssh_public_key_gen" {
-#   type        = "Microsoft.Compute/sshPublicKeys@2022-11-01"
-#   resource_id = azapi_resource.ssh_public_key.id
-#   action      = "generateKeyPair"
-#   method      = "POST"
-
-#   response_export_values = ["publicKey", "privateKey"]
-# }
-
-# # associa o nome da chave criada aleatoriamente com a chave publica
-# resource "azapi_resource" "ssh_public_key" {
-#   type      = "Microsoft.Compute/sshPublicKeys@2022-11-01"
-#   name      = random_pet.ssh_key_name.id
-#   location  = azurerm_resource_group.student-rg.location
-#   parent_id = azurerm_resource_group.student-rg.id
-# }
-
-# # salva a chave publica no diretorio principal
-# resource "local_file" "private_key" {
-#   content         = azapi_resource_action.ssh_public_key_gen.output.privateKey
-#   filename        = "private_key.pem"
-#   file_permission = "0600"
-# }
-
 # Cria a maquina virtual
 resource "azurerm_linux_virtual_machine" "student-vm" {
   name                  = "student-vm"
@@ -137,11 +106,6 @@ resource "azurerm_linux_virtual_machine" "student-vm" {
   admin_password                  = var.vm_admin_password
   disable_password_authentication = false
 
-  # admin_ssh_key {
-  #   username   = var.username
-  #   public_key = azapi_resource_action.ssh_public_key_gen.output.publicKey
-  # }
-
   depends_on = [
     azurerm_network_interface_security_group_association.student-nic-nsg,
     azurerm_network_interface.student-nic
@@ -159,5 +123,3 @@ resource "local_file" "hosts_cfg" {
   )
   filename = "./ansible/inventory.yml"
 }
-
-
