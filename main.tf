@@ -154,6 +154,7 @@ resource "local_file" "hosts_cfg" {
     {
       vm       = azurerm_linux_virtual_machine.student-vm
       username = var.username
+      password = var.vm_admin_password
     }
   )
   filename = "./ansible/inventory.yml"
