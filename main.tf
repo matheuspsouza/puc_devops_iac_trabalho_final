@@ -134,7 +134,7 @@ resource "azurerm_linux_virtual_machine" "student-vm" {
 
   computer_name  = "student-vm"
   admin_username = var.username
-  admin_password = var.userpassword
+  admin_password = var.vm_admin_password
 
   admin_ssh_key {
     username   = var.username
