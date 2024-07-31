@@ -49,7 +49,7 @@ Arquivo variables.tf:
   3. Arquivo inventory.yml: gerado automaticamente ao aplicar o Terraform.
 
 
-## Github Action
+## Github Actions
 - Configurar Segredos no GitHub:
 
 ```
