@@ -66,6 +66,8 @@ jobs:
           pip install ansible
 
       - name: Executar Playbook Ansible
-        run: ansible-playbook playbook.yml -i inventory.yml
         env:
           ANSIBLE_HOST_KEY_CHECKING: 'false'
+        run: |
+          cd ansible
+          ansible-playbook playbook.yml -i inventory.yml
